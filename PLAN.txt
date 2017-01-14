@@ -4,3 +4,6 @@ aas74
 
 BREAKOUT GAME PROJECT PLAN
 
+
+A variant of the game that I thought was interesting was the Worms Breakout. I thought the little worm was adorable to look at. More importantly, I really liked how the game was focused on power ups which made the game more engaging.
+Another variant I enjoyed was the Pinball Breakout. I thought it was cool how the ball sped up when it hit certain objects that were in close proximity to each other. I also really enjoyed the graphics, but understand that is different than the programming and code design portion that we will be focusing on.
