@@ -2,21 +2,31 @@ package breakout;
 
 import java.util.ArrayList;
 import java.util.Random;
-
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
+/*
+ * ASHKA STEPHEN
+ * AAS74
+ * 
+ * ABOUT THIS CLASS: 
+ * This class creates the bricks that will be destroyed. Different bricks on different levels have different point amounts.
+ * 
+ */
+
+
+
 public class Brick extends Rectangle{
-    private static final int BRICK_HEIGHT = 20;
-    private static final int NUM_BRICKS_PER_ROW = 10;
-    private static final int BRICK_WIDTH = 40;
-    private static final int BRICK_SPACE_BETWEEN_EACH = 10;
-    private static final int BRICK_SPACE_BETWEEN_DIFFROWS = 10;
-    private static final int BRICK_Y_OFFSET = 70;
-    private int pointValueOfBrick;
-    Random r;
-    int result;
-    
+	private  final int BRICK_HEIGHT = 20;
+	private  final int NUM_BRICKS_PER_ROW = 10;
+	private  final int BRICK_WIDTH = 40;
+	private  final int BRICK_SPACE_BETWEEN_EACH = 10;
+	private  final int BRICK_SPACE_BETWEEN_DIFFROWS = 10;
+	private  final int BRICK_Y_OFFSET = 70;
+	private int pointValueOfBrick;
+	private Random r;
+	private int result;
+
 	public Brick(double xLocation, double yLocation, int brickWidth, int brickHeight, int pointvalue, Paint brickColor1){
 		this.setFill(brickColor1);
 		this.setX(xLocation);

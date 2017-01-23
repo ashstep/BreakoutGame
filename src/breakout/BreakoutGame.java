@@ -22,30 +22,29 @@ import javafx.util.Duration;
  * This is my main class for the game. The rules and directions are stated on the splash screen. 
  * Please read the directions carefully before playing, as you "lives" may depend on it. 
  * 
- * 
  */
 public class BreakoutGame extends Application {
-	private static final String TITLE = "Breakout";
-	private static final int SIZE = 500;
-	private static final int FRAMES_PER_SECOND = 60;
-	private static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
-	private static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
-	private static final int KEY_INPUT_SPEED = 7;
-	private static final double GROWTH_RATE = 1.1;
+	private  final String TITLE = "Breakout";
+	private  final int SIZE = 500;
+	private  final int FRAMES_PER_SECOND = 60;
+	private  final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
+	private  final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
+	private  final int KEY_INPUT_SPEED = 7;
+	private  final double GROWTH_RATE = 1.1;
 	//BRICK INFORMATION
-	private static final int BRICK_HEIGHT = 20;
-	private static final int BRICK_WIDTH = 40;
-	private static final int BRICK_SPACE_BETWEEN_DIFFROWS = 10;
-	private static final int BRICK_Y_OFFSET = 70;
+	private  final int BRICK_HEIGHT = 20;
+	private  final int BRICK_WIDTH = 40;
+	private  final int BRICK_SPACE_BETWEEN_DIFFROWS = 10;
+	private  final int BRICK_Y_OFFSET = 70;
 	private int LOW_POINT_BRICK = 10;
 	private int MED_POINT_BRICK = 40;
 	private int HIGH_POINT_BRICK = 100;
-	private static final Paint LOW_POINT_BRICK_COLOR = Color.BLUE; 
-	private static final Paint MED_POINT_BRICK_COLOR = Color.DARKBLUE; 
-	private static final Paint HIGH_POINT_BRICK_COLOR = Color.BLUEVIOLET; 
+	private  final Paint LOW_POINT_BRICK_COLOR = Color.BLUE; 
+	private  final Paint MED_POINT_BRICK_COLOR = Color.DARKBLUE; 
+	private  final Paint HIGH_POINT_BRICK_COLOR = Color.BLUEVIOLET; 
 	//POWER UP
-	private static final int POWERUP_HEIGHT = 10;
-	private static final int POWERUP_WIDTH = 60;
+	private  final int POWERUP_HEIGHT = 10;
+	private  final int POWERUP_WIDTH = 60;
 	private int yforPowerUp = 35;
 	//PADDLE
 	private int BALL_RADIUS = 10;
@@ -54,9 +53,9 @@ public class BreakoutGame extends Application {
 	private int PADDLE_WIDTH = 40;
 	private int PADDLE_HEIGHT = 10;
 	//ENCOURAGEMENT FOR THE PLAYER AND OTHER STRINGS
-	private static final String KEEPGOING = "Keep Going!";
-	private static final String GAME_LOST = "Please exit the screen.";
-	private static final String GAME_WON = "You have won the whole game!";
+	private  final String KEEPGOING = "Keep Going!";
+	private  final String GAME_LOST = "Please exit the screen.";
+	private  final String GAME_WON = "You have won the whole game!";
 	private String header = "Directions and Rules:\n";
 	private String space = "\n";
 	private String startGameMessage = "Start the game!";
@@ -169,8 +168,6 @@ public class BreakoutGame extends Application {
 	private void resetBall(int radius, Paint color){
 		ball = new Ball(radius, SIZE, SIZE);
 		ball.setFill(color);
-		ball.xspeed = xspeed;
-		ball.yspeed = yspeed;
 		root0.getChildren().add(ball);}
 
 	//reset the paddle onto the screen 
@@ -213,8 +210,7 @@ public class BreakoutGame extends Application {
 				resetBall(BALL_RADIUS, Color.DARKSALMON);
 				System.out.println("fourth");
 				powerUp3Set = false;}
-			root0.getChildren().remove(powerup);
-		}
+			root0.getChildren().remove(powerup);}
 		
 		if (LIFE_COUNT == 0 || (CURRENT_LEVEL>3 && levelHasBeenSkipped)){
 			clearWholeScreen();
@@ -235,7 +231,7 @@ public class BreakoutGame extends Application {
 				buttonInitialization("For next Level, click here", CURRENT_LEVEL);}
 			if(CURRENT_LEVEL >= 4){
 				printText(GAME_WON);
-				updateLabel(0, 0,  0);
+				updateLabel(0, 0, 0);
 				animation.stop();}}
 		ball.setCenterX(ball.getCenterX() + xspeed * elapsedTime);
 		ball.setCenterY(ball.getCenterY() + yspeed * elapsedTime);
@@ -335,18 +331,19 @@ public class BreakoutGame extends Application {
 			powerup = new Powerup(true, false, false, POWERUP_HEIGHT, POWERUP_WIDTH, saveBrickXlocationforPowerUp, saveBrickYlocationforPowerUp, Color.DEEPSKYBLUE);
 			root0.getChildren().add(powerup);
 		}
-		if(brickRandomNum>=500 && brickRandomNum<700){
+		if(brickRandomNum>=500 && brickRandomNum<800){
 			clearCurrentPowerUp();
 			powerUp2Set = true;
 			powerup = new Powerup(false, true, false, POWERUP_HEIGHT, POWERUP_WIDTH, saveBrickXlocationforPowerUp, saveBrickYlocationforPowerUp, Color.DARKGOLDENROD);
 			root0.getChildren().add(powerup);
 		}
-		if(brickRandomNum>=700 && brickRandomNum<750){
+		if(brickRandomNum >= 800 && brickRandomNum< 900){
 			clearCurrentPowerUp();
 			powerUp3Set = true;
 			powerup = new Powerup(false, false, true, POWERUP_HEIGHT, POWERUP_WIDTH, saveBrickXlocationforPowerUp, saveBrickYlocationforPowerUp, Color.MEDIUMSLATEBLUE);
 			root0.getChildren().add(powerup);}}
 
+	
 	//Is a power up currently in play?
 	private boolean powerUpExists(){
 		if(powerUp1Set || powerUp2Set || powerUp3Set){
@@ -378,7 +375,7 @@ public class BreakoutGame extends Application {
 			levelHasBeenSkipped = true;}
 		else if (code == KeyCode.L){
 			LIFE_COUNT++;}}
-	
+
 	//Start
 	public static void main (String[] args) {
 		launch(args);}}

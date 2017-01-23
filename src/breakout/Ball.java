@@ -9,10 +9,9 @@ import javafx.scene.shape.Circle;
  * This helps us determine the next action.
  */
 public class Ball extends Circle {
-	private static final int SIZE = 500;
-    private static final int BALL_RADIUS = 10;
-    public int xspeed = 50;
-    public int yspeed = 50;
+	private  final int SIZE = 500;
+    private  final int BALL_RADIUS = 10;
+    
     public Ball(int ballRadius, int widthWindow, int heightWindow){
     	double XlocationofBall = widthWindow/2 - ballRadius/2; 
     	double YlocationofBall = heightWindow/2 - ballRadius/2; 

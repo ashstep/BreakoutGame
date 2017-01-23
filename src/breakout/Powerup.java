@@ -12,13 +12,13 @@ import javafx.scene.shape.Rectangle;
  */
 
 public class Powerup extends Rectangle{
-	public int pointValueofPowerup;
-	public int paddleLenghtPowerup;
-	public int ballRadiusofPowerup;
-	private static final int POWERUP_WIDTH = 70;
-	private static final int POWERUP_PADDLE_WIDTH = 70;
-	private static final int POWERUP_RADUIS_SIZE = 50;
-	private static final int SIZE = 500;
+	private int pointValueofPowerup;
+	private int paddleLenghtPowerup;
+	private int ballRadiusofPowerup;
+	private  final int POWERUP_WIDTH = 70;
+	private  final int POWERUP_PADDLE_WIDTH = 70;
+	private  final int POWERUP_RADUIS_SIZE = 50;
+	private  final int SIZE = 500;
 
 	public Powerup(boolean initializePoints, boolean paddleLength, boolean ballSize, int powerUpWidth, int powerUpHeight, double xLocation, double yLocation, Paint color){
 		if(initializePoints){
