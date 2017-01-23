@@ -30,7 +30,6 @@ public class BreakoutGame extends Application {
 	private  final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
 	private  final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
 	private  final int KEY_INPUT_SPEED = 7;
-	private  final double GROWTH_RATE = 1.1;
 	//BRICK INFORMATION
 	private  final int BRICK_HEIGHT = 20;
 	private  final int BRICK_WIDTH = 40;
@@ -90,47 +89,26 @@ public class BreakoutGame extends Application {
 		primaryStage.show();
 	}
 
-	/*
-	 * Set up level one settings and game loop
-	 */
 	private void setupLevel1(int brickPoints, Paint highPointBrickColor) {
 		clearWholeScreen();
 		resetBall(BALL_RADIUS,Color.BLACK);
 		resetPaddle(PADDLE_WIDTH, Color.ALICEBLUE);
 		printTextInitial(KEEPGOING);
 		playersScoreboardInitial(CURRENT_SCORE,  CURRENT_LEVEL,  LIFE_COUNT);
-		brick = new Brick(0, BRICK_Y_OFFSET, BRICK_WIDTH, BRICK_HEIGHT, brickPoints, highPointBrickColor);
-		ArrayList<Brick> brickrow = brick.eachRowofBricks(1,brickPoints, highPointBrickColor, BRICK_WIDTH, BRICK_HEIGHT);
-		root0.getChildren().addAll(brickrow);
+		ArrayList<Brick> brickrow = brickCreationPerLevel(0, 1, brickPoints, highPointBrickColor);
+		timelineSetup(brickrow);
+	}
 
-		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> step(SECOND_DELAY, brickrow));
-		animation = new Timeline();
-		animation.setCycleCount(Timeline.INDEFINITE);
-		animation.getKeyFrames().add(frame);
-		animation.play();
-		}
-
-	/*
-	 * Set up level two settings and game loop (again because we want to ensure the ball speeds up) 
-	 */
 	private void setupLevel2(int brickPoints, Paint highPointBrickColor){
 		clearWholeScreen();
 		printTextInitial(KEEPGOING);
 		playersScoreboardInitial(CURRENT_SCORE,  CURRENT_LEVEL,  LIFE_COUNT);
 		resetBall(BALL_RADIUS, Color.BLACK);
 		resetPaddle(PADDLE_WIDTH+5, Color.ALICEBLUE);
-		brick = new Brick(BRICK_HEIGHT + BRICK_SPACE_BETWEEN_DIFFROWS, BRICK_Y_OFFSET, BRICK_WIDTH, BRICK_HEIGHT, brickPoints, highPointBrickColor);
-		ArrayList<Brick> brickrow = brick.eachRowofBricks(2, brickPoints, highPointBrickColor, BRICK_WIDTH, BRICK_HEIGHT);
-		root0.getChildren().addAll(brickrow);
-		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> step(SECOND_DELAY, brickrow));
-		animation = new Timeline();
-		animation.setCycleCount(Timeline.INDEFINITE);
-		animation.getKeyFrames().add(frame);
-		animation.play();}
-	
-	/*
-	 * Set up level three settings and game loop(again because we want to ensure the ball speeds up)
-	 */
+		ArrayList<Brick> brickrow = brickCreationPerLevel(BRICK_HEIGHT + BRICK_SPACE_BETWEEN_DIFFROWS, 2, brickPoints, highPointBrickColor);
+		timelineSetup(brickrow);
+		}
+
 	private void setupLevel3(int brickPoints, Paint highPointBrickColor){
 		animation.stop();
 		clearWholeScreen();
@@ -138,10 +116,18 @@ public class BreakoutGame extends Application {
 		resetPaddle(PADDLE_WIDTH+10, Color.ALICEBLUE);
 		printTextInitial(KEEPGOING);
 		playersScoreboardInitial(CURRENT_SCORE,  CURRENT_LEVEL,  LIFE_COUNT);
-		brick = new Brick(BRICK_HEIGHT + BRICK_SPACE_BETWEEN_DIFFROWS, BRICK_Y_OFFSET, BRICK_WIDTH, BRICK_HEIGHT, brickPoints, highPointBrickColor);
-		ArrayList<Brick> brickrow = brick.eachRowofBricks(3,brickPoints, highPointBrickColor, BRICK_WIDTH, BRICK_HEIGHT);
+		ArrayList<Brick> brickrow = brickCreationPerLevel(BRICK_HEIGHT + BRICK_SPACE_BETWEEN_DIFFROWS, 3, brickPoints, highPointBrickColor);
+		timelineSetup(brickrow);
+	}
+	
+	private ArrayList<Brick> brickCreationPerLevel(int xStart, int numRows, int brickPoints, Paint highPointBrickColor) {
+		brick = new Brick(xStart, BRICK_Y_OFFSET, BRICK_WIDTH, BRICK_HEIGHT, brickPoints, highPointBrickColor);
+		ArrayList<Brick> brickrow = brick.eachRowofBricks(numRows,brickPoints, highPointBrickColor, BRICK_WIDTH, BRICK_HEIGHT);
 		root0.getChildren().addAll(brickrow);
+		return brickrow;
+	}
 
+	private void timelineSetup(ArrayList<Brick> brickrow) {
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> step(SECOND_DELAY, brickrow));
 		animation = new Timeline();
 		animation.setCycleCount(Timeline.INDEFINITE);
@@ -149,9 +135,6 @@ public class BreakoutGame extends Application {
 		animation.play();
 	}
 
-	/*
-	 * Initialize buttons for various levels and actions
-	 */
 	private void buttonInitialization(String text, int levelNumber){
 		Button button = new Button(text);
 		button.setTranslateX(300);
@@ -162,19 +145,21 @@ public class BreakoutGame extends Application {
 		if(levelNumber == 2){
 			button.setOnAction(e -> setupLevel2(MED_POINT_BRICK, MED_POINT_BRICK_COLOR));}
 		if(levelNumber == 3){
-			button.setOnAction(e -> setupLevel3(HIGH_POINT_BRICK, HIGH_POINT_BRICK_COLOR));}}
+			button.setOnAction(e -> setupLevel3(HIGH_POINT_BRICK, HIGH_POINT_BRICK_COLOR));}
+	}
 
-	//reset the ball onto the screen 
 	private void resetBall(int radius, Paint color){
+		root0.getChildren().remove(ball);
 		ball = new Ball(radius, SIZE, SIZE);
 		ball.setFill(color);
-		root0.getChildren().add(ball);}
+		root0.getChildren().add(ball);
+	}
 
-	//reset the paddle onto the screen 
 	private void resetPaddle(int paddleWidth, Paint color){
 		paddle = new Paddle(paddleWidth, PADDLE_HEIGHT, SIZE, SIZE);
 		paddle.setFill(color);
-		root0.getChildren().add(paddle);}
+		root0.getChildren().add(paddle);
+		}
 
 	/*
 	 * Step function to ensure movement of BOTH the ball and the power ups as they fall (IF they exist).
@@ -182,10 +167,9 @@ public class BreakoutGame extends Application {
 	 * These checks are necessary for the functioning of the program, as it prevents lag.
 	 */
 	private void step (double elapsedTime, ArrayList<Brick> brickrow) {
-		ball.setCenterX(ball.getCenterX() + xspeed * elapsedTime);
-		ball.setCenterY(ball.getCenterY() + yspeed * elapsedTime);
+		updateBallPosition(elapsedTime);
 		if(powerUpExists()){
-			powerup.setY(powerup.getY() - yforPowerUp * -elapsedTime*0.3);
+			powerup.setY(powerup.getY() - yforPowerUp * -elapsedTime * 0.3);
 			resetPowerUpBoolean();}
 		if (checkifBallHitsPaddle()) {
 			yspeed *= -1 ;}
@@ -194,7 +178,29 @@ public class BreakoutGame extends Application {
 		if(checkifBallHitsBrick(brickrow, brick)){
 			yspeed*=-1;}
 		
-		//Power up enacted and removed once it hits the paddle 
+		puttingthePowerUpInAction();
+		
+		if (LIFE_COUNT == 0 || (CURRENT_LEVEL>3 && levelHasBeenSkipped)){
+			clearWholeScreen();
+			printTextInitial(GAME_LOST);}
+		if (ball.ballHitsBottomWall()) {
+			LIFE_COUNT--;
+			ballResetCenterLocation();}
+		
+		//Action to reset to the next level under the following conditions
+		resetToNextLevelUnderFollowingConditions(brickrow);
+		updateBallPosition(elapsedTime);
+		
+		//If power up exists keep updating it
+		if(powerUpExists()){
+			powerup.setY(powerup.getY() - yforPowerUp * -elapsedTime*0.3);}
+		
+		//if you haven't finished the game, keep updating score
+		if(CURRENT_LEVEL < 4){
+			updateLabel(CURRENT_SCORE, CURRENT_LEVEL, LIFE_COUNT);}}
+	
+	//determining the action based on the power up
+	private void puttingthePowerUpInAction() {
 		if(checkifPowerUpHitsPaddle()){
 			if(powerUp1Set){
 				CURRENT_SCORE+=powerup.getPointValue(powerup);
@@ -205,21 +211,18 @@ public class BreakoutGame extends Application {
 				resetPaddle(powerup.getPaddleLengthValue(powerup), Color.TURQUOISE);
 				powerUp2Set = false;}
 			if(powerUp3Set){
-				BALL_RADIUS+=powerup.getRadiusLengthValue(powerup);
-				System.out.println("third");
-				resetBall(BALL_RADIUS, Color.DARKSALMON);
-				System.out.println("fourth");
+				BALL_RADIUS=powerup.getRadiusLengthValue(powerup);
+				resetBall(BALL_RADIUS, Color.DARKGREEN);
 				powerUp3Set = false;}
 			root0.getChildren().remove(powerup);}
-		
-		if (LIFE_COUNT == 0 || (CURRENT_LEVEL>3 && levelHasBeenSkipped)){
-			clearWholeScreen();
-			printTextInitial(GAME_LOST);}
-		if (ball.ballHitsBottomWall()) {
-			LIFE_COUNT--;
-			ballResetCenterLocation();}
-		
-		//Action to reset to the next level under the following conditions
+	}
+
+	private void updateBallPosition(double elapsedTime) {
+		ball.setCenterX(ball.getCenterX() + xspeed * elapsedTime);
+		ball.setCenterY(ball.getCenterY() + yspeed * elapsedTime);
+	}
+
+	private void resetToNextLevelUnderFollowingConditions(ArrayList<Brick> brickrow) {
 		if(ball.ballHitsTopWall() || levelHasBeenSkipped || brickrow.isEmpty()){
 			levelHasBeenSkipped = false;
 			CURRENT_LEVEL++;
@@ -232,17 +235,7 @@ public class BreakoutGame extends Application {
 			if(CURRENT_LEVEL >= 4){
 				printText(GAME_WON);
 				updateLabel(0, 0, 0);
-				animation.stop();}}
-		ball.setCenterX(ball.getCenterX() + xspeed * elapsedTime);
-		ball.setCenterY(ball.getCenterY() + yspeed * elapsedTime);
-		
-		//If power up exists keep updating it
-		if(powerUpExists()){
-			powerup.setY(powerup.getY() - yforPowerUp * -elapsedTime*0.3);}
-		
-		//if you haven't finished the game, keep updating score
-		if(CURRENT_LEVEL < 4){
-			updateLabel(CURRENT_SCORE, CURRENT_LEVEL, LIFE_COUNT);}}
+				animation.stop();}}}
 
 	/*
 	 * Resetting the booleans that keep track of which power ups result in which actions

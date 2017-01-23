@@ -16,7 +16,7 @@ public class Paddle extends Rectangle{
     public final int PADDLE_Y_OFFSET = 25;
 
 	public  Paddle(int paddleWidth, int paddleHeight, int widthWindow, int heightWindow ){
-		double XlocationofPaddle = widthWindow/2 - PADDLE_WIDTH/2; 
+		double XlocationofPaddle = widthWindow/2 - paddleHeight/2; 
 		double YlocationofPaddle = heightWindow - PADDLE_HEIGHT - PADDLE_Y_OFFSET; 
 		this.setX(XlocationofPaddle);
 		this.setY(YlocationofPaddle);
