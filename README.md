@@ -17,33 +17,6 @@ Java program to play a version of Breakout
 	(1) Number of blocks that need to be destroyed to reach the other end will increase / blocks placed closer to the bottom
 	(2) Number of easily-destructable boxes will decrease as levels increase (takes longer to destroy).
  
-## Level Breakdown
-LEVEL 1=========================================
-[][][][][][][][][][][][][][][][][][]
-          []  []  []  []
-
-LEVEL 2=========================================
-[][][][][][][][][][][][][][][][][][]
-[][][][][][][][][][][][][][][][][][]
-[][][][][][][][][][][][][][][][][][]
-
-LEVEL 3=========================================
-[][][][][][][][][][][][][][][][][][]
-[][][][][][][][][][][][][][][][][][]
-[][][][][][][][][][][][][][][][][][]
-    [][][][][][][][][][][][][][]
-          [][][][][][][][]
-                [][]
-
-LEVEL 4=========================================
-[][][][][][][][][][][][][][][][][][]
-[][][][][][][][][][][][][][][][][][]
-[][][][][][][][][][][][][][][][][][]
-[][][][][][][][][][][][][][][][][][]
-    [][][][][][][][][][][][][][]
-          [][][][][][][][]
-                [][]
-                
 ## Types of Blocks:
 - Typical 1 point block that is destroyed after 1 hit
 - Some 3 point blocks that are also destroyed after 1 hit.
