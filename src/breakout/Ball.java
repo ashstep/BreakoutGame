@@ -1,9 +1,6 @@
 package breakout;
 import javafx.scene.shape.Circle;
 /*
- * ASHKA STEPHEN
- * AAS74
- * 
  * ABOUT THIS CLASS: 
  * This class creates the ball and performs checks to see if it has been hit.
  * This helps us determine the next action.
