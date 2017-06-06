@@ -6,12 +6,7 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
 /*
- * ASHKA STEPHEN
- * AAS74
- * 
- * ABOUT THIS CLASS: 
- * This class creates the bricks that will be destroyed. Different bricks on different levels have different point amounts.
- * 
+ * This class creates the bricks that will be destroyed. Different bricks on different levels have different point amounts
  */
 
 
