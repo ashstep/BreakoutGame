@@ -1,6 +1,5 @@
 package breakout;
 //This entire file is part of my masterpiece.
-//Ashka Stephen aas74
 /**
  * This is the Levels class that deals with resetting each level so that the main does not have to.
  * The reason I believe this is well designed is because 1. each method has a well defined and short functionality.
