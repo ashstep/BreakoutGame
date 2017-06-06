@@ -1,10 +1,7 @@
 package breakout;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
-/*
- * ASHKA STEPHEN
- * AAS74
- * 
+/* 
  * ABOUT THIS CLASS: 
  * This class creates the power ups as needed based on random decisions. It is closely tied to the brick class (relation can be seen in the main class) 
  * because, depending on information provided from the brick class, the power up randomly decides whether to generate or not. Thus, this ensures not every brick will have a power up.
