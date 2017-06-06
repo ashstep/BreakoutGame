@@ -16,8 +16,6 @@ import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 /*
- * ASHKA STEPHEN AAS74
- * 
  * ABOUT THIS CLASS:
  * This is my main class for the game. The rules and directions are stated on the splash screen. 
  * Please read the directions carefully before playing, as you "lives" may depend on it. 
